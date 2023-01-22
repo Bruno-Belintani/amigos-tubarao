@@ -12,7 +12,9 @@
 Dado um número de versão MAJOR.MINOR.PATCH, incremente o:
 
 Versão `MAJOR` quando você faz alterações de API incompatíveis (Grandes alterações).
+
 Versão `MINOR` quando você adiciona funcionalidade de maneira compatível com versões anteriores.
+
 Versão `PATCH` quando você faz correções de bugs compatíveis com versões anteriores.
 
 ### Como fazer commit nesse projeto
