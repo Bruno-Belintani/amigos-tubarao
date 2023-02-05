@@ -1,7 +1,13 @@
 package br.com.amigostubarao.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class InformacoesAdicionais {
 
+    @Id
+    private Long id;
     public String cep;
     public String endereco;
     public String cidade;

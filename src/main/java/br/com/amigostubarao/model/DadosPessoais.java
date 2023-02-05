@@ -1,7 +1,13 @@
 package br.com.amigostubarao.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class DadosPessoais {
 
+    @Id
+    public Long id;
     public String nomeCompleto;
     public String cpfCnpj;
     public String email;
