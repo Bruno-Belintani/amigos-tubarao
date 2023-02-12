@@ -11,13 +11,11 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Entity
 @Data
-public class DadosPessoais {
+public class Doacao {
 
     @Id
     public Long id;
-    public String nomeCompleto;
-    public String cpfCnpj;
-    public String email;
-    public String telefone;
-    public String dataNascimento;
+    public double valorMeta;
+    public double valorDoado;
+    public double percentualDoado;
 }
