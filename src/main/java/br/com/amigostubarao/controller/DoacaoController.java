@@ -1,11 +1,14 @@
 package br.com.amigostubarao.controller;
 
+import br.com.amigostubarao.model.DadosPessoais;
 import br.com.amigostubarao.model.Doacao;
+import br.com.amigostubarao.repository.DadosPessoaisRepository;
+import br.com.amigostubarao.repository.DoacaoRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Slf4j
@@ -13,13 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/cadastro-doacao")
 public class DoacaoController {
 
+    @Autowired
+    private DoacaoRepository doacaoRepository;
+
+    @GetMapping
+    public List<Doacao> listar() {
+        return doacaoRepository.findAll();
+    }
     @PostMapping
-    public void cadastro(@RequestBody Doacao cadastroDoacao) {
-        log.info(cadastroDoacao.toString());
+    public void cadastrar(@RequestBody Doacao doacao) {
+        doacaoRepository.save(doacao);
+    }
+    @PutMapping
+    public void alterar(@RequestBody Doacao doacao) {
+        doacaoRepository.save(doacao);
+    }
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id) {
+        doacaoRepository.deleteById(id);
     }
 }
-
-
 
 
 
