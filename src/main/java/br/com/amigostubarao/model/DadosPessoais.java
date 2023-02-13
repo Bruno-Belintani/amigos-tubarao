@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +19,13 @@ public class DadosPessoais {
     public String email;
     public String telefone;
     public String dataNascimento;
+
+    @OneToOne
+    @JoinColumn(name  = "id")
+    private InformacoesAdicionais informacoesAdicionais;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Doacao doacao;
+
 }

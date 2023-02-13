@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,4 +23,8 @@ public class InformacoesAdicionais {
     public String numero;
     public String estado;
     public String complemento;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    private DadosPessoais dadosPessoais;
 }

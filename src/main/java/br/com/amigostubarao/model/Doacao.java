@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +20,8 @@ public class Doacao {
     public double valorMeta;
     public double valorDoado;
     public double percentualDoado;
+
+    @OneToMany
+    @JoinColumn(name = "id")
+    private DadosPessoais dadosPessoais;
 }
