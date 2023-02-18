@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 public class InformacoesAdicionais {
 
     @Id
-    private Long id;
+    private Long info_d;
     public String cep;
     public String endereco;
     public String cidade;

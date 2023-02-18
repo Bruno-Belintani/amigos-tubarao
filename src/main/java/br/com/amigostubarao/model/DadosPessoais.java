@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class DadosPessoais {
 
     @Id
-    public Long id;
+    public Long dado_id;
     public String nomeCompleto;
     public String cpfCnpj;
     public String email;
@@ -21,11 +21,11 @@ public class DadosPessoais {
     public String dataNascimento;
 
     @OneToOne
-    @JoinColumn(name  = "id")
+    @JoinColumn(name  = "info_id")
     private InformacoesAdicionais informacoesAdicionais;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "doa_id")
     private Doacao doacao;
 
 }
