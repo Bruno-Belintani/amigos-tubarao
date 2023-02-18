@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class DadosPessoais {
 
     @Id
-    public Long dado_id;
+    public Long id;
     public String nomeCompleto;
     public String cpfCnpj;
     public String email;
