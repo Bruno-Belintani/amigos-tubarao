@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +13,12 @@ import javax.persistence.Id;
 public class Doacao {
 
     @Id
-    public Long id;
+    public Long doa_id;
     public double valorMeta;
     public double valorDoado;
     public double percentualDoado;
+
+    @OneToOne
+    @JoinColumn(name = "dado_id")
+    private DadosPessoais dadosPessoais;
 }

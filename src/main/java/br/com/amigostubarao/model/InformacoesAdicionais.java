@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,11 +16,15 @@ import javax.persistence.Id;
 public class InformacoesAdicionais {
 
     @Id
-    private Long id;
+    private Long info_d;
     public String cep;
     public String endereco;
     public String cidade;
     public String numero;
     public String estado;
     public String complemento;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    private DadosPessoais dadosPessoais;
 }
