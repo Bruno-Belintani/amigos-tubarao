@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: V001
+      author: msousacode
+      changes:
+        - sql: "CREATE TABLE public.a_controle_acesso (
+            cac_ide numeric(8) NOT NULL DEFAULT nextval('sq_a_controle_acesso'::text::regclass),
+            cac_log varchar(25) NULL,
+            cac_ip varchar(15) NULL,
+            cac_fky_tca_ide numeric(8) NULL,
+            cac_qdo timestamp NULL,
+            CONSTRAINT a_controle_acesso_pkey PRIMARY KEY (cac_ide)
+        );"
