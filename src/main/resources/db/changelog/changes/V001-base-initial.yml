@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: V001
+      author: michael
+      changes:
+        - sql: "drop table if exists dados_pessoais CASCADE; 
+                drop table if exists doacao CASCADE; 
+                drop table if exists informacoes_adicionais CASCADE;
+                
+                 create table dados_pessoais (
+                     id bigint not null,
+                      cpf_cnpj varchar(255),
+                      data_nascimento varchar(255),
+                      email varchar(255),
+                      nome_completo varchar(255),
+                      telefone varchar(255),
+                      doa_id bigint,
+                      info_id bigint,
+                      primary key (id)
+                  );
+                  
+                  create table doacao (
+                     doa_id bigint not null,
+                      percentual_doado numeric not null,
+                      valor_doado numeric not null,
+                      valor_meta numeric not null,
+                      dado_id bigint,
+                      primary key (doa_id)
+                  );
+                  
+                  create table informacoes_adicionais (
+                   id bigint not null,
+                    cep varchar(255),
+                    cidade varchar(255),
+                    complemento varchar(255),
+                    endereco varchar(255),
+                    estado varchar(255),
+                    numero varchar(255),
+                    primary key (id)
+                );
+                
+                alter table dados_pessoais 
+                   add constraint FKammebg6ws3ejbywm2s84g0rhe 
+                   foreign key (doa_id) 
+                   references doacao;
+                
+                alter table dados_pessoais 
+                   add constraint FKapupxoq34k0ja9udcyl9ef5b9 
+                   foreign key (info_id) 
+                   references informacoes_adicionais;
+                
+                alter table doacao 
+                   add constraint FK9r2b3jrskhgab0tuye4h3ib0f 
+                   foreign key (dado_id) 
+                   references dados_pessoais;"
+                
+
