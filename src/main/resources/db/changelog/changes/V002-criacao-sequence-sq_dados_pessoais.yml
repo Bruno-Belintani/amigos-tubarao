@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: V002
+      author: michael
+      changes:
+        - sql: "create sequence sq_dados_pessoais;
+                ALTER TABLE dados_pessoais ALTER COLUMN id SET DEFAULT nextval('sq_dados_pessoais');"

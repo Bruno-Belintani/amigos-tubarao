@@ -1,11 +1,14 @@
 package br.com.amigostubarao.controller;
 
+import br.com.amigostubarao.controller.dto.DadosPessoaisDto;
 import br.com.amigostubarao.model.DadosPessoais;
 import br.com.amigostubarao.repository.DadosPessoaisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dados-pessoais")
@@ -15,13 +18,16 @@ public class DadosPessoaisController {
     private DadosPessoaisRepository dadosPessoaisRepository;
 
     @GetMapping
-    public List<DadosPessoais> listar() {
-        return dadosPessoaisRepository.findAll();
+    public List<DadosPessoaisDto> listar() {
+        return dadosPessoaisRepository.findAll().stream()
+                .map(DadosPessoaisDto::from).collect(Collectors.toList());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void cadastrar(@RequestBody DadosPessoais dadosPessoais) {
-        dadosPessoaisRepository.save(dadosPessoais);
+    public DadosPessoaisDto cadastrar(@RequestBody DadosPessoais dadosPessoais) {
+        var result = dadosPessoaisRepository.save(dadosPessoais);
+        return DadosPessoaisDto.from(result);
     }
 
     @PutMapping
