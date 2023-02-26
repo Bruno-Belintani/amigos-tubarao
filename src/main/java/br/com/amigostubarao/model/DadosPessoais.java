@@ -13,6 +13,8 @@ import javax.persistence.*;
 public class DadosPessoais {
 
     @Id
+    @SequenceGenerator(name = "sq_dados_pessoais", sequenceName = "sq_dados_pessoais", allocationSize = 1)
+    @GeneratedValue(generator = "sq_dados_pessoais", strategy = GenerationType.SEQUENCE)
     public Long id;
     public String nomeCompleto;
     public String cpfCnpj;
@@ -27,5 +29,4 @@ public class DadosPessoais {
     @ManyToOne
     @JoinColumn(name = "doa_id")
     private Doacao doacao;
-
 }
