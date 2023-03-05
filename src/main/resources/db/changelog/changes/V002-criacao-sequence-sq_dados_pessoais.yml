@@ -4,4 +4,10 @@ databaseChangeLog:
       author: michael
       changes:
         - sql: "create sequence sq_dados_pessoais;
-                ALTER TABLE dados_pessoais ALTER COLUMN id SET DEFAULT nextval('sq_dados_pessoais');"
+                ALTER TABLE dados_pessoais ALTER COLUMN dados_pessoais_id SET DEFAULT nextval('sq_dados_pessoais');
+                
+                create sequence sq_doacao;
+                ALTER TABLE doacao ALTER COLUMN doacao_id SET DEFAULT nextval('sq_doacao');
+                
+                create sequence sq_informacoes_adicionais;
+                ALTER TABLE informacoes_adicionais ALTER COLUMN info_adic_id SET DEFAULT nextval('sq_informacoes_adicionais');"
