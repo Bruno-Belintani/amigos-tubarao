@@ -1,39 +1,24 @@
 package br.com.amigostubarao.controller;
 
-import br.com.amigostubarao.model.DadosPessoais;
-import br.com.amigostubarao.model.Doacao;
-import br.com.amigostubarao.repository.DadosPessoaisRepository;
-import br.com.amigostubarao.repository.DoacaoRepository;
-import lombok.extern.slf4j.Slf4j;
+import br.com.amigostubarao.service.DoacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-
-@Slf4j
 @RestController
-@RequestMapping("/cadastro-doacao")
+@RequestMapping(value = "/v1/doacao", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DoacaoController {
 
     @Autowired
-    private DoacaoRepository doacaoRepository;
+    private DoacaoService doacaoService;
 
-    @GetMapping
-    public List<Doacao> listar() {
-        return doacaoRepository.findAll();
-    }
-    @PostMapping
-    public void cadastrar(@RequestBody Doacao doacao) {
-        doacaoRepository.save(doacao);
-    }
-    @PutMapping
-    public void alterar(@RequestBody Doacao doacao) {
-        doacaoRepository.save(doacao);
-    }
-    @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        doacaoRepository.deleteById(id);
+    @PostMapping("/{valor}/identificador/{identificador}")
+    public void doar(@PathVariable(value = "valor") String valor,
+                     @PathVariable("identificador") String identificador) {
+        doacaoService.doar(valor, identificador);
     }
 }
 

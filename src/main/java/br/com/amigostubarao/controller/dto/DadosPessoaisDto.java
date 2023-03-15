@@ -1,13 +1,13 @@
 package br.com.amigostubarao.controller.dto;
 
-import br.com.amigostubarao.model.DadosPessoais;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import br.com.amigostubarao.entity.DadosPessoais;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
 public class DadosPessoaisDto {
+
     public Long id;
     public String nomeCompleto;
     public String cpfCnpj;
@@ -15,7 +15,7 @@ public class DadosPessoaisDto {
     public String telefone;
     public String dataNascimento;
 
-    public DadosPessoaisDto(Long id, String nomeCompleto, String cpfCnpj, String email, String telefone, String dataNascimento) {
+    private DadosPessoaisDto(Long id, String nomeCompleto, String cpfCnpj, String email, String telefone, String dataNascimento) {
         this.id = id;
         this.nomeCompleto = nomeCompleto;
         this.cpfCnpj = cpfCnpj;
@@ -34,10 +34,4 @@ public class DadosPessoaisDto {
                 dadosPessoais.getDataNascimento()
         );
     }
-
-    /*
-    public static DadosPessoaisDto converterDtoUsandoObjectMapper(DadosPessoais dadosPessoais) {
-        ObjectMapper x = new ObjectMapper();
-        return x.writeValue(dadosPessoais, DadosPessoaisDto.class);
-    }*/
 }

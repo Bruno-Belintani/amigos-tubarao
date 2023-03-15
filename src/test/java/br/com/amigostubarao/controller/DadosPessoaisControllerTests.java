@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.UUID;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,7 +27,7 @@ public class DadosPessoaisControllerTests {
     @Test
     void dadoUmJsonDadosPessoaisQuandoCriarEntaoRetornaraHttpStatus201() throws Exception {
 
-        mockMvc.perform(post("/dados-pessoais")
+        mockMvc.perform(post("/v1/dados-pessoais")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8")
                         .content(getJson()))
@@ -38,7 +40,7 @@ public class DadosPessoaisControllerTests {
     @Test
     void retonarTodosOsDadosPessoaisEhttpStatus200() throws Exception {
 
-        mockMvc.perform(get("/dados-pessoais")
+        mockMvc.perform(get("/v1/dados-pessoais")
                         .contentType(MediaType.APPLICATION_JSON)
                         .characterEncoding("utf-8"))
                 .andDo(print())
@@ -47,11 +49,10 @@ public class DadosPessoaisControllerTests {
 
     private String getJson() {
         return "{  \n" +
-                "    \"nomeCompleto\":\"Mike\",\n" +
-                "    \"cpfCnpj\":\"22222222\",\n" +
-                "    \"email\":\"mike@gmail.com\",\n" +
-                "    \"telefone\":\"(11)92222-1111\",\n" +
-                "    \"dataNascimento\":\"01/01/1900\"\n" +
-                "}";
+               "    \"nomeCompleto\":\"Mike\",\n" +
+               "    \"cpfCnpj\":\"" + UUID.randomUUID().toString().substring(0, 14) + "\",\n" +
+               "    \"email\":\"mike@gmail.com\",\n" +
+               "    \"telefone\":\"(11)92222-1111\"\n"+
+               "}";
     }
 }
