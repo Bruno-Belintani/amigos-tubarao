@@ -3,5 +3,11 @@ databaseChangeLog:
       id: V002
       author: michael
       changes:
-        - sql: "create sequence sq_dados_pessoais;
-                ALTER TABLE dados_pessoais ALTER COLUMN id SET DEFAULT nextval('sq_dados_pessoais');"
+        - sql: "
+                alter table if exists dados_pessoais 
+                add constraint UK_485oy78gsixuxt4rao1okngwg unique (cpf_cnpj);
+                
+                alter table if exists doacao 
+                add constraint FKchcmxcmbwxrqcvoe6o4tt49jf 
+                foreign key (dados_pessoais_id) 
+                references dados_pessoais;"

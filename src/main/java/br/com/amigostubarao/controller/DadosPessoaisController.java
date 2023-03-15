@@ -1,44 +1,45 @@
 package br.com.amigostubarao.controller;
 
 import br.com.amigostubarao.controller.dto.DadosPessoaisDto;
-import br.com.amigostubarao.model.DadosPessoais;
-import br.com.amigostubarao.repository.DadosPessoaisRepository;
+import br.com.amigostubarao.entity.DadosPessoais;
+import br.com.amigostubarao.service.DadosPessoaisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/dados-pessoais")
+@RequestMapping(path = "/v1/dados-pessoais", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DadosPessoaisController {
 
     @Autowired
-    private DadosPessoaisRepository dadosPessoaisRepository;
+    private DadosPessoaisService dadosPessoaisService;
 
-    @GetMapping
-    public List<DadosPessoaisDto> listar() {
-        return dadosPessoaisRepository.findAll().stream()
-                .map(DadosPessoaisDto::from).collect(Collectors.toList());
-    }
-
-    @Transactional
-    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public DadosPessoaisDto cadastrar(@RequestBody DadosPessoais dadosPessoais) {
-        var result = dadosPessoaisRepository.save(dadosPessoais);
-        return DadosPessoaisDto.from(result);
+    public DadosPessoaisDto criar(@RequestBody DadosPessoais dadosPessoais) {
+        var resultado = dadosPessoaisService.criar(dadosPessoais);
+        return DadosPessoaisDto.from(resultado);
     }
 
     @PutMapping
-    public void alterar(@RequestBody DadosPessoais dadosPessoais) {
-        dadosPessoaisRepository.save(dadosPessoais);
+    public ResponseEntity<DadosPessoaisDto> atualizar(@RequestBody DadosPessoais dadosPessoais) {
+        var resultado = dadosPessoaisService.atualizar(dadosPessoais);
+        var convertido = DadosPessoaisDto.from(resultado);
+        return ResponseEntity.ok(convertido);
     }
 
+    @GetMapping
+    public ResponseEntity<List<DadosPessoaisDto>> buscarTodos() {
+        var dadosPessoaisDto = dadosPessoaisService.buscarTodos();
+        return ResponseEntity.status(HttpStatus.CREATED).body(dadosPessoaisDto);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        dadosPessoaisRepository.deleteById(id);
+    public void deletarPorId(@PathVariable("id") Long id) {
+        dadosPessoaisService.deletarPorId(id);
     }
 }

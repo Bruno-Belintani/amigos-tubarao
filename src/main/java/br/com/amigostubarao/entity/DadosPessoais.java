@@ -1,6 +1,5 @@
-package br.com.amigostubarao.model;
+package br.com.amigostubarao.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,12 +14,13 @@ public class DadosPessoais {
     @Id
     @SequenceGenerator(name = "sq_dados_pessoais", sequenceName = "sq_dados_pessoais", allocationSize = 1)
     @GeneratedValue(generator = "sq_dados_pessoais", strategy = GenerationType.SEQUENCE)
+    @Column(name = "dados_pessoais_id")
     public Long id;
 
     @Column(name = "nome_completo")
     public String nomeCompleto;
 
-    @Column(name = "cpf_cnpj")
+    @Column(name = "cpf_cnpj", unique = true)
     public String cpfCnpj;
 
     @Column(name = "email")
@@ -32,11 +32,12 @@ public class DadosPessoais {
     @Column(name = "data_nascimento")
     public String dataNascimento;
 
-    @OneToOne
-    @JoinColumn(name  = "informacao_id")
-    private InformacoesAdicionais informacoesAdicionais;
-
-    @ManyToOne
-    @JoinColumn(name = "doacao_id")
-    private Doacao doacao;
+    public static DadosPessoais from(DadosPessoais resultado, DadosPessoais recurso) {
+        resultado.setNomeCompleto(recurso.getNomeCompleto());
+        resultado.setEmail(recurso.getEmail());
+        resultado.setCpfCnpj(recurso.getCpfCnpj());
+        resultado.setDataNascimento(recurso.getCpfCnpj());
+        resultado.setTelefone(recurso.getTelefone());
+        return resultado;
+    }
 }

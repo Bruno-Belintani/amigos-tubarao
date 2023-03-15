@@ -1,4 +1,4 @@
-package br.com.amigostubarao.model;
+package br.com.amigostubarao.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class Doacao {
     @Column(name = "percentual_doado")
     public double percentualDoado;
 
-    @OneToOne
-    @JoinColumn(name = "dado_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dados_pessoais_id", nullable = false)
     private DadosPessoais dadosPessoais;
 }
