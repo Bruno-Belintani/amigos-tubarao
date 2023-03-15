@@ -19,9 +19,9 @@ public class DadosPessoaisController {
     private DadosPessoaisService dadosPessoaisService;
 
     @PostMapping
-    public DadosPessoaisDto criar(@RequestBody DadosPessoais dadosPessoais) {
+    public ResponseEntity<DadosPessoaisDto> criar(@RequestBody DadosPessoais dadosPessoais) {
         var resultado = dadosPessoaisService.criar(dadosPessoais);
-        return DadosPessoaisDto.from(resultado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(DadosPessoaisDto.from(resultado));
     }
 
     @PutMapping
@@ -34,7 +34,7 @@ public class DadosPessoaisController {
     @GetMapping
     public ResponseEntity<List<DadosPessoaisDto>> buscarTodos() {
         var dadosPessoaisDto = dadosPessoaisService.buscarTodos();
-        return ResponseEntity.status(HttpStatus.CREATED).body(dadosPessoaisDto);
+        return ResponseEntity.status(HttpStatus.OK).body(dadosPessoaisDto);
     }
 
     @ResponseStatus(HttpStatus.OK)
