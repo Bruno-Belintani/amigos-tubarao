@@ -1,21 +1,28 @@
 package br.com.amigostubarao.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Data
+@Table(name = "doacao")
 public class Doacao {
 
     @Id
-    public Long doa_id;
+    @SequenceGenerator(name = "sq_doacao", sequenceName = "sq_doacao", allocationSize = 1)
+    @GeneratedValue(generator = "sq_doacao", strategy = GenerationType.SEQUENCE)
+    public Long id;
+
+    @Column(name = "valor_meta")
     public double valorMeta;
+
+    @Column(name = "valor_doado")
     public double valorDoado;
+
+    @Column(name = "percentual_doado")
     public double percentualDoado;
 
     @OneToOne

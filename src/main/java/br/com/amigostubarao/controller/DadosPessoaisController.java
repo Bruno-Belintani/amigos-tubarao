@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,7 @@ public class DadosPessoaisController {
                 .map(DadosPessoaisDto::from).collect(Collectors.toList());
     }
 
+    @Transactional
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public DadosPessoaisDto cadastrar(@RequestBody DadosPessoais dadosPessoais) {
