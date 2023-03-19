@@ -45,4 +45,8 @@ public class DadosPessoaisService {
         var resultado = dadosPessoaisRepository.findById(id).orElseThrow();
         dadosPessoaisRepository.delete(resultado);
     }
+
+    public DadosPessoais buscarPorCpfCnpj(String cpfCnpj) {
+        return dadosPessoaisRepository.findByCpfCnpj(cpfCnpj).orElseThrow();
+    }
 }
