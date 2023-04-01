@@ -17,13 +17,14 @@ class DadosPessoaisServiceTest {
     @Test
     void deveCriarNovoDadosPessoais() {
 
-        String mockCpfCnpj = UUID.randomUUID().toString().substring(0, 14);
+        String cpfCnpjMock = UUID.randomUUID().toString().substring(0, 14);
+        String emailMock = UUID.randomUUID().toString().substring(0, 5) + "@email.com";
 
         DadosPessoais dadosPessoais = new DadosPessoais();
-        dadosPessoais.setNomeCompleto("Anthony Jorge Jorge da Rosa");
-        dadosPessoais.setEmail("anthony_darosa@fosj.unesp.br");
+        dadosPessoais.setNomeCompleto("Nome mock");
+        dadosPessoais.setEmail(emailMock);
         dadosPessoais.setTelefone("8338384251");
-        dadosPessoais.setCpfCnpj(mockCpfCnpj);
+        dadosPessoais.setCpfCnpj(cpfCnpjMock);
 
         DadosPessoais result = dadosPessoaisService.criar(dadosPessoais);
 
@@ -31,6 +32,6 @@ class DadosPessoaisServiceTest {
         Assertions.assertEquals(result.getNomeCompleto(), dadosPessoais.getNomeCompleto());
         Assertions.assertEquals(result.getEmail(), dadosPessoais.getEmail());
         Assertions.assertEquals(result.getTelefone(), dadosPessoais.getTelefone());
-        Assertions.assertEquals(result.getCpfCnpj(), mockCpfCnpj);
+        Assertions.assertEquals(result.getCpfCnpj(), cpfCnpjMock);
     }
 }
